@@ -1,0 +1,79 @@
+{
+    "name": "explain-code-extension",
+    "displayName": "Explain Code",
+    "description": "Explains selected code using OpenAI.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "explain-code.explain",
+                "title": "Explain Code"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "explain-code.explain",
+                    "group": "navigation",
+                    "when": "editorHasSelection"
+                }
+            ]
+        },
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "explain-code-container",
+                    "title": "Code Explanation",
+                    "icon": "$(code)"
+                }
+            ]
+        },
+        "views": {
+            "explain-code-container": [
+                {
+                    "type": "webview",
+                    "id": "explainCode.explanationView",
+                    "name": "Code Explanation"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile && npm run build-webview",
+        "compile": "tsc -p ./",
+        "build-webview": "vite build ./src/webview",
+        "watch": "tsc -w -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js",
+        "dev-webview": "vite ./src/webview"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.4",
+        "@types/react": "^18.2.45",
+        "@types/react-dom": "^18.2.18",
+        "@types/vscode": "^1.85.0",
+        "@typescript-eslint/eslint-plugin": "^6.14.0",
+        "@typescript-eslint/parser": "^6.14.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "eslint": "^8.55.0",
+        "typescript": "^5.3.3",
+        "vite": "^6.2.0"
+    },
+    "dependencies": {
+        "openai": "^4.21.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-markdown": "^10.1.0"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/out/**/*.js"
+            ],
+        },
+        { // Add this configuration for webview debugging
+            "name": "Debug Webview",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222, // Make sure this port is available
+            "webRoot": "${workspaceFolder}/src/webview",
+            "timeout": 30000
+        }
+    ]
+}
